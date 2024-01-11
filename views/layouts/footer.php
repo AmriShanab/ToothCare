@@ -6,16 +6,16 @@
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        , made with ❤️ by
-                        <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                        
+                        <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder"></a>
                     </div>
                     <div>
-                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank"></a>
+                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4"></a>
 
-                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
+                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4"></a>
 
-                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
+                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4"></a>
                     </div>
                 </div>
             </footer>
@@ -34,7 +34,7 @@
             <!-- / Layout wrapper -->
 
             <div class="buy-now">
-                <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+                <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now"></a>
             </div>
 
             <!-- Core JS -->
