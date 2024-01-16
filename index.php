@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../../config.php';
+include __DIR__ . '/config.php';
 include __DIR__ . '/helpers/AppManager.php';
 
 require_once __DIR__ . '/models/User.php';
@@ -18,6 +18,8 @@ dd($users);
 // if (isset($username)) {
 
   header('location: views/admin/dasboard.php');
+// } else {
+//   header('location: views/auth/login.php');
 // }
 
 
