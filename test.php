@@ -8,7 +8,7 @@ require_once __DIR__ . '/models/User.php';
 
 $userModel = new User();
 
-if ($userModel->createUser("musab321", "mypassword123", "operator", "musab321@example.com")) {
+if ($userModel->createUser("Amri", "mypassword123", "operator", "amri@example.com")) {
     echo "User created successfully!";
 } else {
     echo "Failed to create user. May be user already exist!";
