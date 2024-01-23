@@ -1,6 +1,6 @@
 <?php
 require_once '../config.php';
-// require_once '../helpers/AppManager.php';
+require_once '../helpers/AppManager.php';
 // require_once '../models/Appointment.php';
 // require_once '../models/Payment.php';
 // require_once '../models/Treatment.php';
@@ -8,7 +8,25 @@ require_once '../models/User.php';
 
 //create user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'create_user') {
-    dd($_POST);
+
+    try {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $permission = $_POST['permission'];
+
+        $userModel = new User();
+        $created =  $userModel->createUser($username, $password, $permission, $email);
+        if ($created) {
+            echo json_encode(['success' => true, 'message' => "User created successfully!"]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to create user. May be user already exist!']);
+        }
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+    }
+    exit;
 }
 
 //book_appointment

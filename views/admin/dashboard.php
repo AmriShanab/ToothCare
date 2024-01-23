@@ -1,6 +1,5 @@
 <?php
 require_once('../layouts/header.php');
-
 ?>
 
 <!-- Content -->
@@ -22,7 +21,8 @@ require_once('../layouts/header.php');
           </div>
           <div class="col-sm-5 text-center text-sm-left">
             <div class="card-body pb-0 px-0 px-md-4">
-            <img src="<?= asset('assets/img/illustrations/man-with-laptop-light.png') ?>" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png" />            </div>
+              <img src="<?= asset('assets/img/illustrations/man-with-laptop-light.png') ?>" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png" />
+            </div>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ require_once('../layouts/header.php');
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                <img src="<?= asset('assets/img/icons/unicons/chart-success.png') ?>" alt="chart success" class="rounded" />
+                  <img src="<?= asset('assets/img/icons/unicons/chart-success.png') ?>" alt="chart success" class="rounded" />
                 </div>
                 <div class="dropdown">
                   <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,8 +57,8 @@ require_once('../layouts/header.php');
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                <img src="<?= asset('assets/img/icons/unicons/wallet-info.png') ?>" alt="Credit Card" class="rounded" /> 
-                </div>               
+                  <img src="<?= asset('assets/img/icons/unicons/wallet-info.png') ?>" alt="Credit Card" class="rounded" />
+                </div>
                 <div class="dropdown">
                   <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-dots-vertical-rounded"></i>
