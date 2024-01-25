@@ -55,7 +55,7 @@ $users = $userModel->getAll();
                                     </td>
                                      <td>
                                         <div>
-                                            <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Edit</button>
+                                        <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Edit</button>
                                             <!-- <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a> -->
                                         </div>
                                     </td> 
@@ -187,8 +187,21 @@ $users = $userModel->getAll();
                                 <label class="input-group-text" for="inputGroupSelect01">Options</label>
                                 <select class="form-select" id="permission" name="permission" required>
                                     <option selected="" value="">Choose...</option>
-                                    <option value="operator">Operator</option>
-                                    <option value="doctor">Doctor</option>
+                                    <option value="operator">Doctor</option>
+                                    <option value="doctor">Operator</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col mb-0">
+                            <label class="form-label" for="is_active">Is Active</label>
+                            <div class="input-group">
+                                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                                <select class="form-select" id="is_active" name="is_active" required>
+                                    <option selected="" value="">Choose...</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
                                 </select>
                             </div>
                         </div>
@@ -257,16 +270,48 @@ require_once('../layouts/footer.php');
             }
         });
 
-        $('.edit-user').on('click',function() {
+        $('.edit-user').on('click', async function() {
             var user_id = $(this).data('id');
-            var username = $(this).data('username');
-            var email = $(this).data('email');
-
-            $("#editUserModal #username").val(username);
-            $("#editUserModal #email").val(email);
-            $("#editUserModal").modal("show");
-            
-            
+            await getUserById(user_id);
         })
+
+
+        async function getUserById(id) {
+        var formAction = $('#update-user-form').attr('action');
+
+        // Perform AJAX request
+        $.ajax({
+            url: formAction,
+            type: 'GET',
+            data: {
+                user_id: id,
+                action: 'get_user'
+            }, // Form data
+            dataType: 'json',
+            success: function(response) {
+                showAlert(response.message, response.success ? 'primary' : 'danger');
+                if (response.success) {
+                    var username = response.data.username;
+                    var email = response.data.email;
+                    var permission = response.data.permission;
+                    var is_active = response.data.is_active;
+
+                    $('#editUserModal #username').val(username);
+                    $('#editUserModal #email').val(email);
+                    $('#editUserModal #permission option[value="' + permission + '"]').prop('selected', true);
+                    $('#editUserModal #is_active option[value="' + is_active + '"]').prop('selected', true);
+                    $('#editUserModal').modal('show');
+                }
+            },
+            error: function(error) {
+                // Handle the error
+                console.error('Error submitting the form:', error);
+            },
+            complete: function(response) {
+                // This will be executed regardless of success or error
+                console.log('Request complete:', response);
+            }
+        });
+    }
     });
 </script>
