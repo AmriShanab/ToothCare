@@ -53,12 +53,13 @@ $users = $userModel->getAll();
                                             <?php } ?>
                                         </div>
                                     </td>
-                                     <td>
+                                    <td>
                                         <div>
-                                        <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Edit</button>
-                                            <!-- <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a> -->
+                                            <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Edit</button>
+                                            <button class="btn btn-sm btn-danger m-2 delete-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Delete</button>
+
                                         </div>
-                                    </td> 
+                                    </td>
                                 </tr>
                             <?php
                             }
@@ -140,12 +141,13 @@ $users = $userModel->getAll();
     </div>
 </div>
 
-<!--update userModal -->
+<!-- Update User Modal -->
 <div class="modal fade " id="editUserModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="update-user-form" action="<?= url('services/ajax_functions.php') ?>">
+            <form id="update-user-form" action="<?= url('services/ajax_functions.php') ?>" autocomplete="off">
                 <input type="hidden" name="action" value="update_user">
+                <input type="hidden" name="id" id="user_id">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel1">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -187,39 +189,39 @@ $users = $userModel->getAll();
                                 <label class="input-group-text" for="inputGroupSelect01">Options</label>
                                 <select class="form-select" id="permission" name="permission" required>
                                     <option selected="" value="">Choose...</option>
-                                    <option value="operator">Doctor</option>
-                                    <option value="doctor">Operator</option>
+                                    <option value="operator">Operator</option>
+                                    <option value="doctor">Doctor</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col mb-0">
-                            <label class="form-label" for="is_active">Is Active</label>
+                            <label class="form-label" for="is_active">Status</label>
                             <div class="input-group">
-                                <label class="input-group-text" for="inputGroupSelect01">Options</label>
                                 <select class="form-select" id="is_active" name="is_active" required>
                                     <option selected="" value="">Choose...</option>
                                     <option value="1">Active</option>
-                                    <option value="0">InActive</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 mt-3">
-                        <div id="alert-container"></div>
+                        <div id="alert-container-update-form"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
-                    <button type="button" id="create-now" class="btn btn-primary">Save</button>
+                    <button type="button" id="update-now" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <?php
 require_once('../layouts/footer.php');
 ?>
@@ -275,8 +277,51 @@ require_once('../layouts/footer.php');
             await getUserById(user_id);
         })
 
+        $('#update-now').on('click', function() {
 
-        async function getUserById(id) {
+            // Get the form element
+            var form = $('#update-user-form')[0];
+            $('#update-user-form')[0].reportValidity();
+
+            // Check form validity
+            if (form.checkValidity()) {
+                // Serialize the form data
+                var formData = $('#update-user-form').serialize();
+                var formAction = $('#update-user-form').attr('action');
+
+                // Perform AJAX request
+                $.ajax({
+                    url: formAction,
+                    type: 'POST',
+                    data: formData, // Form data
+                    dataType: 'json',
+                    success: function(response) {
+                        showAlert(response.message, response.success ? 'primary' : 'danger', 'alert-container-update-form');
+                        if (response.success) {
+                            $('#editUserModal').modal('hide');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(error) {
+                        // Handle the error
+                        console.error('Error submitting the form:', error);
+                    },
+                    complete: function(response) {
+                        // This will be executed regardless of success or error
+                        console.log('Request complete:', response);
+                    }
+                });
+            } else {
+                var message = ('Form is not valid. Please check your inputs.');
+                showAlert(message, 'danger');
+            }
+        });
+
+    });
+
+    async function getUserById(id) {
         var formAction = $('#update-user-form').attr('action');
 
         // Perform AJAX request
@@ -291,11 +336,13 @@ require_once('../layouts/footer.php');
             success: function(response) {
                 showAlert(response.message, response.success ? 'primary' : 'danger');
                 if (response.success) {
+                    var user_id = response.data.id;
                     var username = response.data.username;
                     var email = response.data.email;
                     var permission = response.data.permission;
                     var is_active = response.data.is_active;
 
+                    $('#editUserModal #user_id').val(user_id);
                     $('#editUserModal #username').val(username);
                     $('#editUserModal #email').val(email);
                     $('#editUserModal #permission option[value="' + permission + '"]').prop('selected', true);
@@ -313,5 +360,4 @@ require_once('../layouts/footer.php');
             }
         });
     }
-    });
 </script>

@@ -50,19 +50,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id']) && isset($_G
 
 //update user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_user') {
-
     try {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $permission = $_POST['permission'];
+        $is_active = $_POST['is_active'];
+        $id = $_POST['id'];
+
+        // Validate inputs
+        if (empty($username) || empty($email)) {
+            echo json_encode(['success' => false, 'message' => 'Required fields are missing!']);
+            exit;
+        }
+
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid email address']);
+            exit;
+        }
 
         $userModel = new User();
-        $created =  $userModel->createUser($username, $password, $permission, $email);
-        if ($created) {
-            echo json_encode(['success' => true, 'message' => "User created successfully!"]);
+        $updated =  $userModel->updateUser($id, $username, $password, $permission, $email);
+        if ($updated) {
+            echo json_encode(['success' => true, 'message' => "User updated successfully!"]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to create user. May be user already exist!']);
+            echo json_encode(['success' => false, 'message' => 'Failed to update user. May be user already exist!']);
         }
     } catch (PDOException $e) {
         // Handle database connection errors
