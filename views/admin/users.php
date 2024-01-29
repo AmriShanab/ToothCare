@@ -55,8 +55,8 @@ $users = $userModel->getAll();
                                     </td>
                                     <td>
                                         <div>
-                                            <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Edit</button>
-                                            <button class="btn btn-sm btn-danger m-2 delete-user" data-id="<?= $c['id']; ?>" data-username="<?= $c['username']; ?>" data-email="<?= $c['email']; ?>">Delete</button>
+                                            <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>">Edit</button>
+                                            <button class="btn btn-sm btn-danger m-2 delete-user" data-id="<?= $c['id']; ?>">Delete</button>
 
                                         </div>
                                     </td>
@@ -277,6 +277,12 @@ require_once('../layouts/footer.php');
             await getUserById(user_id);
         })
 
+        $('.delete-user').on('click', async function() {
+            var user_id = $(this).data('id');
+            var is_confirm = confirm('Are you sure,Do you want to delete?');
+            if (is_confirm) await deleteById(user_id);
+        })
+
         $('#update-now').on('click', function() {
 
             // Get the form element
@@ -348,6 +354,36 @@ require_once('../layouts/footer.php');
                     $('#editUserModal #permission option[value="' + permission + '"]').prop('selected', true);
                     $('#editUserModal #is_active option[value="' + is_active + '"]').prop('selected', true);
                     $('#editUserModal').modal('show');
+                }
+            },
+            error: function(error) {
+                // Handle the error
+                console.error('Error submitting the form:', error);
+            },
+            complete: function(response) {
+                // This will be executed regardless of success or error
+                console.log('Request complete:', response);
+            }
+        });
+    }
+
+    async function deleteById(id) {
+        var formAction = $('#update-user-form').attr('action');
+
+        // Perform AJAX request
+        $.ajax({
+            url: formAction,
+            type: 'GET',
+            data: {
+                user_id: id,
+                action: 'delete_user'
+            }, // Form data
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
                 }
             },
             error: function(error) {

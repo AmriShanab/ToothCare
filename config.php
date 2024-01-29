@@ -83,3 +83,4 @@ function generateRandomString($length = 4)
 {
     return bin2hex(random_bytes($length / 2));
 }
+

@@ -3,7 +3,7 @@ require_once '../config.php';
 require_once '../helpers/AppManager.php';
 // require_once '../models/Appointment.php';
 // require_once '../models/Payment.php';
-// require_once '../models/Treatment.php';
+ require_once '../models/Treatment.php';
 require_once '../models/User.php';
 
 //create user
@@ -48,6 +48,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id']) && isset($_G
     exit;
 }
 
+//Delete by user id
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['user_id']) && isset($_GET['action']) &&  $_GET['action'] == 'delete_user') {
+
+    try {
+        $user_id = $_GET['user_id'];
+        $userModel = new User();
+        $deleted = $userModel->deleteRec($user_id);
+
+        if ($deleted) {
+            echo json_encode(['success' => true, 'message' => "User deleted successfully!", 'data' => $deleted]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to delete user.']);
+        }
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+    }
+    exit;
+}
+
 //update user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_user') {
     try {
@@ -55,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $email = $_POST['email'];
         $password = $_POST['password'];
         $permission = $_POST['permission'];
-        $is_active = $_POST['is_active'];
+        $is_active = $_POST['is_active'] == 1 ? 1 : 0;
         $id = $_POST['id'];
 
         // Validate inputs
@@ -71,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         }
 
         $userModel = new User();
-        $updated =  $userModel->updateUser($id, $username, $password, $permission, $email);
+        $updated =  $userModel->updateUser($id, $username, $password, $permission, $email, $is_active);
         if ($updated) {
             echo json_encode(['success' => true, 'message' => "User updated successfully!"]);
         } else {

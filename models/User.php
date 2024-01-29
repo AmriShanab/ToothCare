@@ -153,3 +153,14 @@ class User extends BaseModel
         }
     }
 }
+
+function deleteUser($id) {
+    $user = new User;
+    $user->deleteRec($id);
+
+    if ($user) {
+        return true;
+    } else {
+        return false;
+    }
+}
