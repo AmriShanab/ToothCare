@@ -1,13 +1,15 @@
 <?php
 require_once('../layouts/header.php');
-require_once __DIR__ . '/../../models/doctor_availability.php';
+require_once(__DIR__ . '/../../models/DoctorAvailability.php');
 
-$userModel = new DoctorAvailable();
-$availability = $userModel -> getAll();
+
+$doctorAvailabilityModel = new DoctorAvailability();
+$doctorAvailabilities = $doctorAvailabilityModel->getAll();
+
 ?>
-
 <div class="container">
-    <h1 class="mx-3 my-5">Doctors Availability</h1>
+
+    <h1 class="mx-3 my-5">Doctor Availability</h1>
     <section class="content m-3">
         <div class="container-fluid">
             <div class="card">
@@ -18,26 +20,23 @@ $availability = $userModel -> getAll();
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th class="">Day</th>
-                                <th class="">session_from</th>
-                                <th class="">session_to</th>
-                                <th class="">doctor_id</th>
+                                <th class="">Session From</th>
+                                <th class="">Session To</th>
+                                <th class="">Doctor</th>
                                 <th class="">Status</th>
-                                <!-- <th style="width: 200px">Options</th> -->
+                                <!-- <th class="text-center" style="width: 200px">Options</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($availability as $key => $c) {
+                            foreach ($doctorAvailabilities as $c) {
                             ?>
                                 <tr>
-                                    <td><?= ++$key ?></td>
+                                    <td> <?= $c['id'] ?? ""; ?> </td>
                                     <td> <?= $c['day'] ?? ""; ?> </td>
                                     <td> <?= $c['session_from'] ?? ""; ?> </td>
                                     <td> <?= $c['session_to'] ?? ""; ?> </td>
-                                    <td> <?= $c['doctor_id'] ?? ""; ?> </td>
-                                    
-
-                                    <td> </td>
+                                    <td> <?= $c['doctor_name'] ?? ""; ?> </td>
                                     <td>
                                         <div class="">
                                             <?php if ($c['is_active'] == 1) { ?>
@@ -47,13 +46,13 @@ $availability = $userModel -> getAll();
                                             <?php } ?>
                                         </div>
                                     </td>
-                                    <td>
+                                    <!-- TODO -->
+                                    <!-- <td>
                                         <div>
-                                            <button class="btn btn-sm btn-info m-2 edit-user" data-id="<?= $c['id']; ?>">Edit</button>
-                                            <button class="btn btn-sm btn-danger m-2 delete-user" data-id="<?= $c['id']; ?>">Delete</button>
-
+                                            <a class="btn btn-sm btn-info m-2" href="edit.php?id=<?= $c['id']; ?>">Edit</a>
+                                            <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php
                             }
@@ -66,10 +65,4 @@ $availability = $userModel -> getAll();
         </div>
     </section>
 </div>
-
-</div>
-
-
-<?php
-require_once('../layouts/footer.php');
-?>
+<?php require_once('../layouts/footer.php'); ?>

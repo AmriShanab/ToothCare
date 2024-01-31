@@ -3,7 +3,7 @@ require_once '../config.php';
 require_once '../helpers/AppManager.php';
 // require_once '../models/Appointment.php';
 // require_once '../models/Payment.php';
- require_once '../models/Treatment.php';
+// require_once '../models/Treatment.php';
 require_once '../models/User.php';
 
 //create user
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['user_id']) && isset($_GE
     try {
         $user_id = $_GET['user_id'];
         $userModel = new User();
-        $deleted = $userModel->deleteRec($user_id);
+        $deleted = $userModel->deleteUser($user_id);
 
         if ($deleted) {
             echo json_encode(['success' => true, 'message' => "User deleted successfully!", 'data' => $deleted]);
@@ -221,3 +221,5 @@ if (
     }
     exit;
 }
+
+dd('Access denied..!');

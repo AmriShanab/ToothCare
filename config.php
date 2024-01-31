@@ -2,7 +2,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'toothcare');
+define('DB_NAME', 'toothCare');
 
 define('BASE_PATH', __DIR__);
 define('CURRENT_DOMAIN', current_domain());
@@ -83,4 +83,3 @@ function generateRandomString($length = 4)
 {
     return bin2hex(random_bytes($length / 2));
 }
-

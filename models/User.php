@@ -82,6 +82,7 @@ class User extends BaseModel
 
         return $result; // Return the user if found, or false if not found
     }
+
     function createUser($username, $password, $permission, $email, $is_active = 1)
     {
         $userModel = new User();
@@ -152,15 +153,16 @@ class User extends BaseModel
             return null;
         }
     }
-}
 
-function deleteUser($id) {
-    $user = new User;
-    $user->deleteRec($id);
+    function deleteUser($id)
+    {
+        $user = new User();
+        $user->deleteRec($id);
 
-    if ($user) {
-        return true;
-    } else {
-        return false;
+        if ($user) {
+            return true; // User udapted successfully
+        } else {
+            return false; // User update failed (likely due to database error)
+        }
     }
 }

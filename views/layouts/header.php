@@ -84,23 +84,39 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                             </a>
                         </li>
 
+
+
+                        <li class="menu-item <?= $currentFilename === "available_channelings.php" ? 'active' : '' ?>">
+                            <a href="<?= url('views/admin/available_channelings.php') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-run"></i>
+                                <div data-i18n="Analytics">Appointment Booking</div>
+                            </a>
+                        </li>
+                        <li class="menu-item <?= $currentFilename === "doctors.php" ? 'active' : '' ?>">
+                            <a href="<?= url('views/admin/doctors.php') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-plus-medical"></i>
+                                <div data-i18n="Analytics">Doctors</div>
+                            </a>
+                        </li>
+
                         <li class="menu-item <?= $currentFilename === "doctor_availability.php" ? 'active' : '' ?>">
                             <a href="<?= url('views/admin/doctor_availability.php') ?>" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-run"></i>
+                                <i class="menu-icon tf-icons bx bx-time-five"></i>
                                 <div data-i18n="Analytics">Doctor Availability</div>
                             </a>
                         </li>
+                        <li class="menu-item <?= $currentFilename === "treatments.php" ? 'active' : '' ?>">
+                            <a href="<?= url('views/admin/treatments.php') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-dna"></i>
+                                <div data-i18n="Analytics">Treatments</div>
+                            </a>
+                        </li>
+
 
                         <li class="menu-item <?= $currentFilename === "users.php" ? 'active' : '' ?>">
                             <a href="<?= url('views/admin/users.php') ?>" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                 <div data-i18n="Analytics">User</div>
-                            </a>
-                        </li>
-                        <li class="menu-item <?= $currentFilename === "treatments.php" ? 'active' : '' ?>">
-                            <a href="<?= url('views/admin/treatments.php') ?>" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Treatments</div>
                             </a>
                         </li>
 
