@@ -120,4 +120,13 @@ class Appointment extends BaseModel
     {
         return $this->pm->run("SELECT apt.*, tmt.name AS treatment_name, dr.name AS doctor_name FROM appointments AS apt INNER JOIN  doctors AS dr ON apt.doctor_id = dr.id INNER JOIN treatments AS tmt ON tmt.id = apt.treatment_id order by id desc");
     }
+
+    public function getAllWithDoctorAndTreatmentByUserId($user_id)
+    {
+        $param = array(':user_id' => $user_id);
+        return $this->pm->run(
+            "SELECT apt.*, tmt.name AS treatment_name, dr.name AS doctor_name FROM appointments AS apt INNER JOIN  doctors AS dr ON apt.doctor_id = dr.id INNER JOIN treatments AS tmt ON tmt.id = apt.treatment_id where dr.user_id = :user_id order by id desc",
+            $param
+        );
+    }
 }
