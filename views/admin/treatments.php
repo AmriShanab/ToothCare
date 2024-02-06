@@ -1,19 +1,13 @@
 <?php
 require_once('../layouts/header.php');
-require_once(__DIR__ . '/../../models/Treatment.php');
-
+require_once __DIR__ . '/../../models/Treatment.php';
 
 $treatmentModel = new Treatment();
 $treatments = $treatmentModel->getAll();
 ?>
 <div class="container">
 
-    <h1 class="mx-3 my-5">Treatments
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary float-end m-3" data-bs-toggle="modal" data-bs-target="#createUserModal">
-            Create Treatment
-        </button>
-    </h1>
+    <h1 class="mx-3 my-5">Treatments</h1>
     <section class="content m-3">
         <div class="container-fluid">
             <div class="card">
@@ -52,9 +46,9 @@ $treatments = $treatmentModel->getAll();
                                     </td>
                                     <td>
                                         <div>
-                                            
-                                             <a class="btn btn-sm btn-info m-2" href="edit.php?id=<?= $c['id']; ?>">Edit</a>
-                                            <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a> 
+                                            <!-- TODO -->
+                                            <!-- <a class="btn btn-sm btn-info m-2" href="edit.php?id=<?= $c['id']; ?>">Edit</a>
+                                            <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a> -->
                                         </div>
                                     </td>
                                 </tr>

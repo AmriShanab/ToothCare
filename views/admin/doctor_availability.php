@@ -1,7 +1,6 @@
 <?php
 require_once('../layouts/header.php');
-require_once(__DIR__ . '/../../models/DoctorAvailability.php');
-
+require_once __DIR__ . '/../../models/DoctorAvailability.php';
 
 $doctorAvailabilityModel = new DoctorAvailability();
 $doctorAvailabilities = $doctorAvailabilityModel->getAll();

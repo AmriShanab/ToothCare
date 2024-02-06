@@ -126,6 +126,7 @@ $users = $userModel->getAll();
                             </div>
                         </div>
                     </div>
+                    <div id="additional-fields"></div>
                     <div class="mb-3 mt-3">
                         <div id="alert-container"></div>
                     </div>
@@ -207,6 +208,7 @@ $users = $userModel->getAll();
                             </div>
                         </div>
                     </div>
+
                     <div class="mb-3 mt-3">
                         <div id="alert-container-update-form"></div>
                     </div>
@@ -325,6 +327,30 @@ require_once('../layouts/footer.php');
             }
         });
 
+        $('#permission').change(function() {
+            var permission = $(this).val();
+            if (permission === 'doctor') {
+                $('#additional-fields').html(
+                    '<div class="row mt-2">' +
+                    '<div class="col-12 mb-3">' +
+                    '<label for="name" class="form-label">Doctor Name</label>' +
+                    '<input type="text" id="name" name="doctor_name" class="form-control" placeholder="Enter Name" required />' +
+                    '</div>' +
+                    '<div class="col-12 mb-3">' +
+                    '<label for="about" class="form-label">About Doctor</label>' +
+                    '<textarea id="about" name="about_doctor" class="form-control" placeholder="Enter About" required></textarea>' +
+                    '</div>' +
+                    '</div>'
+                );
+            } else {
+                $('#additional-fields').empty();
+            }
+        });
+
+        // Trigger change event on page load if doctor permission is selected by default
+        if ($('#permission').val() === 'doctor') {
+            $('#permission').trigger('change');
+        }
     });
 
     async function getUserById(id) {

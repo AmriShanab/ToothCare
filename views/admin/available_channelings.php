@@ -1,7 +1,6 @@
 <?php
 require_once('../layouts/header.php');
-require_once(__DIR__ . '/../../models/Doctor.php');
-
+require_once __DIR__ . '/../../models/Doctor.php';
 
 $doctorModel = new Doctor();
 $doctors = $doctorModel->getAllActive();

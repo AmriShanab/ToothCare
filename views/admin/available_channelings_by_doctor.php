@@ -1,9 +1,8 @@
 <?php
 require_once('../layouts/header.php');
-require_once(__DIR__ . '/../../models/DoctorAvailability.php');
-require_once(__DIR__ . '/../../models/Appointment.php');
-require_once(__DIR__ . '/../../helpers/AppointmentScheduler.php');
-
+require_once __DIR__ . '/../../models/DoctorAvailability.php';
+require_once __DIR__ . '/../../models/Appointment.php';
+require_once __DIR__ . '/../../helpers/AppointmentScheduler.php';
 
 // Get the week input field value
 $weekInputValue = $_GET['week'];
@@ -52,7 +51,7 @@ $scheduler->displaySchedule();
                         </div>
                         <div class="col mb-4 form-group">
                             <label for="appointmentNo">Appointment Number</label>
-                            <input type="text" class="form-control appointmentNo" name="appointment_no" disabled>
+                            <input type="text" class="form-control appointmentNo" id="appointmentNo" name="appointment_no" readonly>
                         </div>
                     </div>
                     <div class="row g-1">
@@ -106,7 +105,7 @@ $scheduler->displaySchedule();
                     <input type="hidden" id="timeSlotFrom" name="time_slot_from">
                     <input type="hidden" id="timeSlotTo" name="time_slot_to">
                     <input type="hidden" id="appointmentDate" name="appointment_date">
-                    <input type="hidden" class="appointmentNo" name="appointment_no">
+                    <!-- <input type="hidden" id="appointmentNo" name="appointment_no"> -->
                     <input type="hidden" name="action" value="book_appointment">
                     <input type="hidden" id="treatment_fee" name="treatment_fee">
                     <input type="hidden" id="registration_fee" name="registration_fee">

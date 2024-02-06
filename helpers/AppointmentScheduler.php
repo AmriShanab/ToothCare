@@ -1,11 +1,8 @@
 <?php
-require_once(__DIR__ . '/../models/DoctorAvailability.php');
-require_once(__DIR__ . '/../models/Appointment.php');
-
-require_once(__DIR__ . '/../models/Doctor.php');
-
-require_once(__DIR__ . '/../models/Treatment.php');
-
+require_once 'C:\xampp\htdocs\ToothCare\models\DoctorAvailability.php';
+require_once 'C:\xampp\htdocs\ToothCare\models\Appointment.php';
+require_once 'C:\xampp\htdocs\ToothCare\models\Doctor.php';
+require_once 'C:\xampp\htdocs\ToothCare\models\Treatment.php';
 
 /**
  * Class AppointmentScheduler

@@ -1,10 +1,11 @@
 <?php
 require_once '../config.php';
 require_once '../helpers/AppManager.php';
-// require_once '../models/Appointment.php';
-// require_once '../models/Payment.php';
-// require_once '../models/Treatment.php';
+require_once '../models/Appointment.php';
+require_once '../models/Payment.php';
+require_once '../models/Treatment.php';
 require_once '../models/User.php';
+require_once '../models/Doctor.php';
 
 //create user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'create_user') {
@@ -15,9 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $password = $_POST['password'];
         $permission = $_POST['permission'];
 
+        $doctor_name = $_POST['doctor_name'] ?? null;
+        $about_doctor = $_POST['about_doctor'] ?? null;
+
         $userModel = new User();
         $created =  $userModel->createUser($username, $password, $permission, $email);
+
         if ($created) {
+
+            if ($permission == 'doctor') {
+                $doctorModel = new Doctor();
+                $doctorCreated =  $doctorModel->createDoctor($doctor_name,  $about_doctor, 1); // TODO 
+            }
+
             echo json_encode(['success' => true, 'message' => "User created successfully!"]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Failed to create user. May be user already exist!']);

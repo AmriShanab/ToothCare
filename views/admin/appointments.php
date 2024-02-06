@@ -1,7 +1,6 @@
 <?php
 require_once('../layouts/header.php');
-require_once 'C:\xampp\htdocs\ToothCare\views\admin\..\..\models\appointment.php';
-
+require_once __DIR__ . '/../../models/Appointment.php';
 
 $appointmentModel = new Appointment();
 if ($permission == 'operator') {

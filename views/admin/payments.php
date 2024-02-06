@@ -1,9 +1,7 @@
 <?php
 require_once('../layouts/header.php');
-
-require_once 'C:\xampp\htdocs\ToothCare\views\admin\..\..\models\Payment.php';
-
-require_once 'C:\xampp\htdocs\ToothCare\views\admin\..\..\models\Treatment.php';
+require_once __DIR__ . '/../../models/Payment.php';
+require_once __DIR__ . '/../../models/Treatment.php';
 
 $paymentModel = new Payment();
 $payments = $paymentModel->getAllWithTreatmentAndAppointment();

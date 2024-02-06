@@ -215,3 +215,6 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                     </nav>
 
                     <!-- / Navbar -->
+
+
+                    <!-- User.php and ajax_function.php -->

@@ -40,4 +40,22 @@ class Doctor extends BaseModel
 
         return $this->pm->run("UPDATE doctors SET name = :name, about = :about, photo = :photo, is_active = :is_active, user_id = :user_id WHERE id = :id", $param);
     }
+
+
+    function createDoctor($name, $about, $user_id, $photo = null, $is_active = 1)
+    {
+        $doctorModel = new Doctor();
+        $doctorModel->name = $name;
+        $doctorModel->about = $about;
+        $doctorModel->user_id = $user_id;
+        $doctorModel->is_active = $is_active;
+        $doctorModel->photo = $photo;
+        $doctorModel->addNewRec();
+
+        if ($doctorModel) {
+            return true; // Doctor created successfully
+        } else {
+            return false; // Doctor creation failed (likely due to database error)
+        }
+    }
 }

@@ -103,7 +103,7 @@ class User extends BaseModel
         $user->addNewRec();
 
         if ($user) {
-            return true; // User created successfully
+            return $user; // User created successfully
         } else {
             return false; // User creation failed (likely due to database error)
         }
