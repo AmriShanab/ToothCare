@@ -42,13 +42,6 @@ $doctors = $doctorModel->getAll();
                                             <?php } ?>
                                         </div>
                                     </td>
-                                    <!-- TODO -->
-                                    <!-- <td>
-                                        <div>
-                                            <a class="btn btn-sm btn-info m-2" href="edit.php?id=<?= $c['id']; ?>">Edit</a>
-                                            <a class="btn btn-sm btn-danger m-2" href="#" onclick="confirmDelete(<?= $c['id']; ?>)">Delete</a>
-                                        </div>
-                                    </td> -->
                                 </tr>
                             <?php
                             }

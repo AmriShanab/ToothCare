@@ -73,7 +73,6 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                     <div class="app-brand demo">
                         <a href="index.html" class="app-brand-link">
-
                             <span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize">TooTH Care</span>
                         </a>
 
@@ -100,6 +99,16 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                                     <div data-i18n="Analytics">Appointment Booking</div>
                                 </a>
                             </li>
+                        <?php endif; ?>
+
+                        <li class="menu-item <?= $currentFilename === "appointments.php" ? 'active' : '' ?>">
+                            <a href="<?= url('views/admin/appointments.php') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-collection"></i>
+                                <div data-i18n="Analytics">Appointments</div>
+                            </a>
+                        </li>
+
+                        <?php if ($permission == 'operator') : ?>
                             <li class="menu-item <?= $currentFilename === "doctors.php" ? 'active' : '' ?>">
                                 <a href="<?= url('views/admin/doctors.php') ?>" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-plus-medical"></i>
@@ -107,12 +116,7 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                                 </a>
                             </li>
                         <?php endif; ?>
-                        <li class="menu-item">
-                            <a href="<?= url('views/admin/appointments.php') ?>" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                <div data-i18n="Analytics">Appointments</div>
-                            </a>
-                        </li>
+
                         <?php if ($permission == 'operator') : ?>
                             <li class="menu-item <?= $currentFilename === "doctor_availability.php" ? 'active' : '' ?>">
                                 <a href="<?= url('views/admin/doctor_availability.php') ?>" class="menu-link">
@@ -215,6 +219,3 @@ $currentFilename = basename($currentUrl);  // e.g., "dashboard.php"
                     </nav>
 
                     <!-- / Navbar -->
-
-
-                    <!-- User.php and ajax_function.php -->

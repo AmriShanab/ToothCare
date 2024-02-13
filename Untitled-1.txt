@@ -1,0 +1,10 @@
+ 
+ Panel password: n6E_4eFwU!GYfyQ
+
+  website name : sampleweb1.free.nf
+
+  DB Name : if0_35939727_ToothCare
+
+  MYSQL User name : if0_35939727
+
+  MYSQL Host Name : 	sql300.infinityfree.com

@@ -1,0 +1,5 @@
+DB password : qnWwGR5prBU6
+Webiste Name : AmriShanab.free.nf
+DB NAme : if0_35939890_ToothCare
+Mysql USername : if0_35939890
+Mysqlhostname : sql300.infinityfree.com

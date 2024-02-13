@@ -165,4 +165,10 @@ class User extends BaseModel
             return false; // User update failed (likely due to database error)
         }
     }
+
+    public function getLastInsertedUserId()
+    {
+        $result = $this->pm->run('SELECT MAX(id) as lastInsertedId FROM users', null, true);
+        return $result['lastInsertedId'] ?? 100;
+    }
 }

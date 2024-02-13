@@ -22,7 +22,7 @@ $doctors = $doctorModel->getAllActive();
                 ?>
 
                     <div class="col-md-6 col-lg-4">
-                        <div class="card">
+                        <div class="card my-3">
                             <div class="card-header"></div>
                             <div class="card-body">
                                 <div class="col-md-7 mx-auto">
@@ -33,7 +33,7 @@ $doctors = $doctorModel->getAllActive();
                                     <?= $about ?>
                                 </p>
                                 <div class="col-md-12">
-                                    <input class="form-control" type="week" name="week" id="week_date" required>
+                                    <input class="form-control" type="week" name="week" id="week_date_<?= $doctor_id ?>" required>
                                 </div>
                                 <div class="col-md-12 mt-2 text-right">
                                     <a href="javascript:void(0)" class="btn btn-primary bookNowBtn" data-doctor-id="<?= $doctor_id ?>">Book Now</a>
@@ -54,8 +54,8 @@ $doctors = $doctorModel->getAllActive();
 <script>
     $(document).ready(function() {
         $(".bookNowBtn").on("click", function() {
-            var selectedWeek = $("#week_date").val();
             var doctorId = $(this).data('doctor-id');
+            var selectedWeek = $("#week_date_" + doctorId).val();
 
             // Check if the selected week is not null
             if (selectedWeek !== null && selectedWeek !== "") {

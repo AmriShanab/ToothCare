@@ -25,8 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         if ($created) {
 
             if ($permission == 'doctor') {
+                $user_id = $userModel->getLastInsertedUserId();
                 $doctorModel = new Doctor();
-                $doctorCreated =  $doctorModel->createDoctor($doctor_name,  $about_doctor, 1); // TODO 
+                $doctorCreated =  $doctorModel->createDoctor($doctor_name,  $about_doctor, $user_id);
             }
 
             echo json_encode(['success' => true, 'message' => "User created successfully!"]);
@@ -119,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'book_appointment') {
 
     try {
-        // $appointment = new Appointment();
+        $appointment = new Appointment();
 
         if (isset($_POST['id'])) {
             $appointment = $appointment->getById($_POST['id']);
@@ -138,12 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $appointment->appointment_date = $_POST['appointment_date'] ?? null;
 
         $insertedId = $appointment->save();
-        // $treatment = new Treatment();
+        $treatment = new Treatment();
         $appointmentTreatment = $treatment->getById($appointment->treatment_id);
 
         if (isset($insertedId) && isset($appointmentTreatment)) {
 
-            // $payment = new Payment();
+            $payment = new Payment();
             $payment->appointment_id = $insertedId;
             $payment->registration_fee = $appointmentTreatment['registration_fee'] ?? 0;
             $payment->registration_fee_paid = 1;
@@ -173,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $treatment_fee_paid = $_POST['treatment_fee_paid'] ? 1 : 0;
         $quantity = $_POST['quantity'] ?? 1;
 
-        // $payment = new Payment();
+        $payment = new Payment();
         $paymentData = $payment->getById($payment_id);
         if (isset($paymentData)) {
             $payment->id = $payment_id;
